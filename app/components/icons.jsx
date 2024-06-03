@@ -328,32 +328,56 @@ export const IconPlus = () => {
     </svg>
   );
 };
-export const IconSearch = () => {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="32"
-      height="31"
-      viewBox="0 0 32 31"
-      fill="none"
-    >
-      <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
-        d="M21.0804 18.9783H22.4434L31.0526 27.6047L28.4819 30.1754L19.8555 21.5662V20.2032L19.3896 19.7201C17.4228 21.4109 14.8694 22.4289 12.0916 22.4289C5.89781 22.4289 0.877197 17.4082 0.877197 11.2144C0.877197 5.02061 5.89781 0 12.0916 0C18.2854 0 23.3061 5.02061 23.3061 11.2144C23.3061 13.9922 22.2881 16.5456 20.5973 18.5124L21.0804 18.9783ZM4.32774 11.2145C4.32774 15.5104 7.79558 18.9783 12.0916 18.9783C16.3876 18.9783 19.8554 15.5104 19.8554 11.2145C19.8554 6.91846 16.3876 3.45062 12.0916 3.45062C7.79558 3.45062 4.32774 6.91846 4.32774 11.2145Z"
-        fill="white"
-      />
-    </svg>
-  );
+export const IconSearch = ({ color = "white" }) => {
+  switch (color) {
+    case "white":
+      return (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="31"
+          viewBox="0 0 32 31"
+          fill="none"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M21.0804 18.9783H22.4434L31.0526 27.6047L28.4819 30.1754L19.8555 21.5662V20.2032L19.3896 19.7201C17.4228 21.4109 14.8694 22.4289 12.0916 22.4289C5.89781 22.4289 0.877197 17.4082 0.877197 11.2144C0.877197 5.02061 5.89781 0 12.0916 0C18.2854 0 23.3061 5.02061 23.3061 11.2144C23.3061 13.9922 22.2881 16.5456 20.5973 18.5124L21.0804 18.9783ZM4.32774 11.2145C4.32774 15.5104 7.79558 18.9783 12.0916 18.9783C16.3876 18.9783 19.8554 15.5104 19.8554 11.2145C19.8554 6.91846 16.3876 3.45062 12.0916 3.45062C7.79558 3.45062 4.32774 6.91846 4.32774 11.2145Z"
+            fill={color}
+          />
+        </svg>
+      );
+    case "gray":
+      return (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="13"
+          height="12"
+          viewBox="0 0 13 12"
+          fill="none"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M8.71143 7.54717H9.25345L12.6771 10.9777L11.6548 12L8.22429 8.57633V8.03431L8.03905 7.8422C7.25688 8.51458 6.24145 8.91938 5.13682 8.91938C2.67369 8.91938 0.677124 6.92281 0.677124 4.45969C0.677124 1.99657 2.67369 0 5.13682 0C7.59994 0 9.59651 1.99657 9.59651 4.45969C9.59651 5.56432 9.1917 6.57976 8.51932 7.36192L8.71143 7.54717ZM2.04933 4.4597C2.04933 6.16811 3.42841 7.54718 5.13681 7.54718C6.84522 7.54718 8.22429 6.16811 8.22429 4.4597C8.22429 2.7513 6.84522 1.37222 5.13681 1.37222C3.42841 1.37222 2.04933 2.7513 2.04933 4.4597Z"
+            fill="#333333"
+          />
+        </svg>
+      );
+  }
 };
-export const IconChromeReader = ({ color = "orange" }) => {
+export const IconChromeReader = ({
+  color = "orange",
+  height = "31",
+  width = "31",
+}) => {
   switch (color) {
     case "orange":
       return (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="31"
-          height="31"
+          width={width}
+          height={height}
           viewBox="0 0 31 31"
           fill="none"
         >
@@ -370,8 +394,8 @@ export const IconChromeReader = ({ color = "orange" }) => {
       return (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="28"
-          height="22"
+          width={width}
+          height={height}
           viewBox="0 0 28 22"
           fill="none"
         >
@@ -385,14 +409,14 @@ export const IconChromeReader = ({ color = "orange" }) => {
       );
   }
 };
-export const IconChat = ({ color = "purple" }) => {
+export const IconChat = ({ color = "purple", width = "", height = "" }) => {
   switch (color) {
     case "purple":
       return (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="31"
-          height="31"
+          width={width}
+          height={height}
           viewBox="0 0 31 31"
           fill="none"
         >
@@ -409,8 +433,8 @@ export const IconChat = ({ color = "purple" }) => {
       return (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="26"
-          height="26"
+          width={width}
+          height={height}
           viewBox="0 0 26 26"
           fill="none"
         >
@@ -419,6 +443,23 @@ export const IconChat = ({ color = "purple" }) => {
             clip-rule="evenodd"
             d="M17.6433 0.514526H1.29826C0.606744 0.514526 0.0409546 1.08032 0.0409546 1.77184V19.3742L5.07019 14.3449H17.6433C18.3348 14.3449 18.9006 13.7791 18.9006 13.0876V1.77184C18.9006 1.08032 18.3348 0.514526 17.6433 0.514526ZM16.386 3.02908V11.8302H4.02665L3.28484 12.5721L2.5556 13.3013V3.02908H16.386ZM21.4152 5.54381H23.9298C24.6213 5.54381 25.1871 6.10959 25.1871 6.80112V25.6608L20.1579 20.6315H6.32748C5.63596 20.6315 5.07017 20.0657 5.07017 19.3742V16.8596H21.4152V5.54381Z"
             fill="white"
+          />
+        </svg>
+      );
+    case "blue":
+      return (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width={width}
+          height={height}
+          viewBox="0 0 26 26"
+          fill="none"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M17.6433 0.514526H1.29826C0.606744 0.514526 0.0409546 1.08032 0.0409546 1.77184V19.3742L5.07019 14.3449H17.6433C18.3348 14.3449 18.9006 13.7791 18.9006 13.0876V1.77184C18.9006 1.08032 18.3348 0.514526 17.6433 0.514526ZM16.386 3.02908V11.8302H4.02665L3.28484 12.5721L2.5556 13.3013V3.02908H16.386ZM21.4152 5.54381H23.9298C24.6213 5.54381 25.1871 6.10959 25.1871 6.80112V25.6608L20.1579 20.6315H6.32748C5.63596 20.6315 5.07017 20.0657 5.07017 19.3742V16.8596H21.4152V5.54381Z"
+            fill="#8885FF"
           />
         </svg>
       );
@@ -440,12 +481,12 @@ export const IconX = () => {
     </svg>
   );
 };
-export const IconEnergy = () => {
+export const IconEnergy = ({ width = "18", height = "32" }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="18"
-      height="32"
+      width={width}
+      height={height}
       viewBox="0 0 18 32"
       fill="none"
     >
