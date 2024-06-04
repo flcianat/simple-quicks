@@ -2,21 +2,25 @@
 import { Button } from "@/components/ui/button";
 import { IconChat, IconChromeReader, IconEnergy } from "./icons";
 import { useState } from "react";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+import { useToggle } from "../store/zustand";
 
 export default function Menu() {
   const [active, setActive] = useState("default");
-  const [show, setShow] = useState(false);
+
+  const {
+    toggle,
+    setToggle,
+
+    setBubbleActive,
+  } = useToggle();
 
   const handleButtonClick = (buttonType) => {
     if (active === buttonType) {
       setActive("default");
+      setBubbleActive("");
     } else {
       setActive(buttonType);
+      setBubbleActive(buttonType);
     }
   };
 
@@ -43,10 +47,10 @@ export default function Menu() {
       default:
         return (
           <Button
-            className="rounded-full h-[60px] w-[60px] hover:bg-primary-blue-200"
-            onClick={() => (handleButtonClick(""), setShow(!show))}
+            className="rounded-full h-[60px] w-[60px] hover:bg-primary-blue-200 bg-primary-blue-100 z-40"
+            onClick={() => (handleButtonClick(""), setToggle(!toggle))}
           >
-            <IconEnergy width="20" height="20" />
+            <IconEnergy width="25" height="25" />
           </Button>
         );
     }
@@ -57,7 +61,7 @@ export default function Menu() {
       <div className="flex gap-3 place-items-center fixed right-0 bottom-0 m-5">
         <div
           className={`flex gap-3 transition-transform duration-500 ${
-            show
+            toggle
               ? "translate-x-0 opacity-100 visible"
               : "translate-x-[60px] opacity-0 invisible"
           }`}
@@ -65,7 +69,7 @@ export default function Menu() {
           <Button
             className={`${
               active === "task" ? "hidden" : "block"
-            } rounded-full h-[50px] w-[50px] bg-white hover:bg-none`}
+            } rounded-full h-[50px] w-[50px] bg-white hover:bg-gray-200 transition-all`}
             onClick={() => handleButtonClick("task")}
           >
             <IconChromeReader width="20" height="20" />
@@ -73,7 +77,7 @@ export default function Menu() {
           <Button
             className={`${
               active === "chat" ? "hidden" : "block"
-            } rounded-full h-[50px] w-[50px] bg-white hover:bg-none`}
+            } rounded-full h-[50px] w-[50px] bg-white hover:bg-gray-200 transition-all`}
             onClick={() => handleButtonClick("chat")}
           >
             <IconChat color="blue" width="20" height="20" />
