@@ -4,8 +4,11 @@ import { create } from "zustand";
 export const useToggle = create((set) => ({
   toggle: false, // Initial state
   bubbleActive: "",
-  showChatRoom:false,
+  showChatRoom: false,
+  chatType: "",
   setToggle: () => set((state) => ({ toggle: !state.toggle })),
   setBubbleActive: (value) => set({ bubbleActive: value }),
-  setShowChatRoom: () => set((state) => ({ showChatRoom: !state.showChatRoom })),
+  setShowChatRoom: () =>
+    set((state) => ({ showChatRoom: !state.showChatRoom })),
+  setChatType: (value) => set({ chatType: value }),
 }));

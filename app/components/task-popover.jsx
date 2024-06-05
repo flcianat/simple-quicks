@@ -58,7 +58,6 @@ export default function TaskPopover({ data }) {
             return <TaskCard data={x} />;
           })}
 
-          {/* TODO : add toggle function / add array function */}
           {newTask}
         </div>
       </div>

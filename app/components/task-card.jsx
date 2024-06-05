@@ -3,6 +3,7 @@
 import { Separator } from "@/components/ui/separator";
 import { useState } from "react";
 import {
+  Bookmark,
   ChevronUp,
   Clock4,
   Ellipsis,
@@ -14,12 +15,9 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { DatePicker } from "@/components/datepicker";
-import { Button } from "@/components/ui/button";
 
 export default function TaskCard({ data }) {
   const [checkbox, setCheckbox] = useState(data?.completed);
@@ -100,6 +98,7 @@ export default function TaskCard({ data }) {
                 />
                 <DatePicker size="sm" deadline={data?.deadline} />
               </div>
+
               <div className="w-full flex gap-3 place-items-baseline">
                 <button className="">
                   <Pencil
@@ -118,12 +117,22 @@ export default function TaskCard({ data }) {
                     : "No Description"}
                 </p>
               </div>
+
+              <div className="flex place-items-center gap-3 mt-3">
+                <Bookmark size={15} className="text text-primary-blue-100" />
+                <div className="flex text-[14px] gap-2 text-primary-gray-300 font-semibold">
+                  <h1 className="bg bg-sticker-orange px-2 rounded-md">
+                    Important ASAP
+                  </h1>
+                  <h1 className="bg bg-sticker-tosca px-2 rounded-md">
+                    Self Task
+                  </h1>
+                </div>
+              </div>
             </div>
           ) : null}
         </div>
         <Separator className="bg bg-primary-gray-200" />
-
-        {/* new task mapping */}
       </div>
     </>
   );

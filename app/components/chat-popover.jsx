@@ -1,18 +1,13 @@
 "use client";
 
-import { Input } from "@/components/ui/input";
 import { useToggle } from "../store/zustand";
 import { Search, User2 } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
-import { AvatarImage } from "@radix-ui/react-avatar";
 import { IconPerson } from "./icons";
-import { useState } from "react";
-import ChatRoom from "./chat-room";
 
-export default function ChatPopover() {
-  const { bubbleActive, setBubbleActive, showChatRoom, setShowChatRoom } =
-    useToggle();
+export default function ChatPopover({ data }) {
+  const { bubbleActive, setBubbleActive, setChatType } = useToggle();
 
   return (
     <div className={bubbleActive === "chat" ? "block" : "hidden"}>
@@ -25,8 +20,76 @@ export default function ChatPopover() {
 
         {/* chat list  */}
 
+        {data.map((x) => {
+          return (
+            <div
+              className="py-2 px-2 hover:bg-gray-50 hover:cursor-pointer my-1 rounded-md transition-all"
+              onClick={() => (setBubbleActive("chatroom"), setChatType(x.type))}
+            >
+              <div
+                className={`${x.type === "single" ? "gap-7" : "gap-3"} flex `}
+              >
+                {x.type === "single" ? (
+                  <Avatar>
+                    <AvatarFallback className="bg bg-primary-blue-100 text-white font-semibold">
+                      F
+                    </AvatarFallback>
+                  </Avatar>
+                ) : (
+                  <div className="flex -space-x-6 ">
+                    <Avatar>
+                      <AvatarFallback className="bg bg-primary-gray-100 text-primary-gray-200 font-semibold">
+                        <IconPerson color="gray" />
+                      </AvatarFallback>
+                    </Avatar>
+                    <Avatar>
+                      <AvatarFallback className="bg bg-primary-blue-100 text-white font-semibold">
+                        <IconPerson color="white" />
+                      </AvatarFallback>
+                    </Avatar>
+                  </div>
+                )}
+
+                <div className=" w-full flex place-items-center">
+                  <div className="w-full">
+                    <div className="flex gap-3 place-items-center">
+                      <h1 className="font-semibold text-primary-blue-100 text-[16px]">
+                        {x.name}
+                      </h1>
+                      <h1 className="text text-primary-gray-200 text-[14px]">
+                        {x.lastMessageTime}
+                      </h1>
+                    </div>
+
+                    {x.type === "single" ? (
+                      <div>
+                        <h1 className="text-[14px]">
+                          Hey there! Welcome to your inbox.
+                        </h1>
+                      </div>
+                    ) : (
+                      <div>
+                        <h1 className="text-[14px] font-semibold text-primary-gray-300">
+                          Cameron Phillips :
+                        </h1>
+                        <h1 className="text-[14px]">Please check this out!</h1>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="w-[8px] h-[8px] bg-indicator-red rounded-full"></div>
+                </div>
+              </div>
+              <Separator className="bg bg-primary-gray-200 mt-3" />
+            </div>
+          );
+        })}
+
         {/* chat - group */}
-        <div className="py-2 px-2 hover:bg-gray-50 hover:cursor-pointer my-1 rounded-md transition-all">
+        {/* <div
+          className="py-2 px-2 hover:bg-gray-50 hover:cursor-pointer my-1 rounded-md transition-all"
+          onClick={() => (setBubbleActive("chatroom"), setChatType("group"))}
+        >
           <div className="flex gap-3">
             <div className="flex -space-x-6 ">
               <Avatar>
@@ -63,14 +126,12 @@ export default function ChatPopover() {
               <div className="w-[8px] h-[8px] bg-indicator-red rounded-full"></div>
             </div>
           </div>
-        </div>
-
-        <Separator className="bg bg-primary-gray-200" />
+        </div> */}
 
         {/* chat - single */}
-        <div
+        {/* <div
           className="py-2 px-2 hover:bg-gray-50 hover:cursor-pointer my-1 rounded-md transition-all"
-          onClick={() => setBubbleActive("chatroom")}
+          onClick={() => (setBubbleActive("chatroom"), setChatType("single"))}
         >
           <div className="flex gap-7 place-items-center">
             <Avatar>
@@ -92,7 +153,7 @@ export default function ChatPopover() {
               <h1 className="text-[14px]">Hey there! Welcome to your inbox.</h1>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* chat room */}
       </div>

@@ -38,3 +38,8 @@ export async function getTaskbyID(id) {
   const res = await BASE({ method: "get", type: `tasks/${id}` });
   return res;
 }
+
+export async function getAllChat() {
+  const res = await BASE({ method: "get", type: "chatList" });
+  return res.data;
+}

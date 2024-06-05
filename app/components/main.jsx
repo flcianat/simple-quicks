@@ -8,26 +8,34 @@ import ChatRoom from "./chat-room";
 import { useToggle } from "../store/zustand";
 
 export default function Main() {
-  const { bubbleActive, setBubbleActive } = useToggle();
+  const { bubbleActive, chatType } = useToggle();
   const [allTask, setAllTask] = useState([]);
+  const [allChat, setAllChat] = useState([]);
 
   const getAllTask = async () => {
     const res = await BASE({ method: "get", type: "tasks" });
     setAllTask(res.data);
-    console.log(res);
+  };
+
+  const getAllChatList = async () => {
+    const res = await BASE({ method: "get", type: "chatList" });
+    setAllChat(res.data);
   };
 
   useEffect(() => {
     getAllTask();
+    getAllChatList();
   }, []);
 
   return (
     <div className="p-5">
-      {/* TODO : add loading data state */}
       <TaskPopover data={allTask} />
 
-      {/* TODO : add loading data state */}
-      {bubbleActive === "chatroom" ? <ChatRoom /> : <ChatPopover />}
+      {bubbleActive === "chatroom" ? (
+        <ChatRoom type={chatType} />
+      ) : (
+        <ChatPopover data={allChat} />
+      )}
 
       <Menu />
     </div>
