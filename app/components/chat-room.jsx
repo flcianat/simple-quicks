@@ -151,6 +151,7 @@ export default function ChatRoom({ type = "" }) {
           </div>
 
           <div className="fixed bottom-[110px] ml-[10px]">
+            {/* NOTE : could be added */}
             {/* <div className="flex justify-center">
               <div className="py-2 px-4 bg-sticker-blue rounded-[5px] place-items-center gap-3 mb-2 w-[150px] text-[14px] flex justify-center">
                 <h1 className="font-semibold text-primary-blue-100">
