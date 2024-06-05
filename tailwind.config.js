@@ -2,6 +2,7 @@
 // const { colors: defaultColors } = require("tailwindcss/defaultTheme");
 const colors = {
   white: "#FFF",
+  brokenwhite:"#F8F8F8",
   primary: {
     blue: {
       100: "#2F80ED",

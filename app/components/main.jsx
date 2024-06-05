@@ -4,8 +4,11 @@ import { BASE } from "../api/api-call";
 import ChatPopover from "./chat-popover";
 import Menu from "./menu";
 import TaskPopover from "./task-popover";
+import ChatRoom from "./chat-room";
+import { useToggle } from "../store/zustand";
 
 export default function Main() {
+  const { bubbleActive, setBubbleActive } = useToggle();
   const [allTask, setAllTask] = useState([]);
 
   const getAllTask = async () => {
@@ -20,9 +23,12 @@ export default function Main() {
 
   return (
     <div className="p-5">
-      {/* TODO : add loading state */}
+      {/* TODO : add loading data state */}
       <TaskPopover data={allTask} />
-      <ChatPopover />
+
+      {/* TODO : add loading data state */}
+      {bubbleActive === "chatroom" ? <ChatRoom /> : <ChatPopover />}
+
       <Menu />
     </div>
   );

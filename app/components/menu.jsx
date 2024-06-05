@@ -7,12 +7,7 @@ import { useToggle } from "../store/zustand";
 export default function Menu() {
   const [active, setActive] = useState("default");
 
-  const {
-    toggle,
-    setToggle,
-
-    setBubbleActive,
-  } = useToggle();
+  const { toggle, setToggle, setBubbleActive } = useToggle();
 
   const handleButtonClick = (buttonType) => {
     if (active === buttonType) {
