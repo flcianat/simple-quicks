@@ -54,8 +54,12 @@ export default function TaskPopover({ data }) {
         </div>
 
         <div className=" overflow-auto h-[450px] w-full px-2">
-          {data.map((x) => {
-            return <TaskCard data={x} />;
+          {data.map((x, i) => {
+            return (
+              <div key={i}>
+                <TaskCard data={x} />
+              </div>
+            );
           })}
 
           {newTask}

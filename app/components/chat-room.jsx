@@ -138,8 +138,8 @@ export default function ChatRoom({ type = "" }) {
                   <MoreButton />
                   <div className="bg-chat-base-purple p-2 space-y-1 w-[450px]">
                     <p className="text-[14px]">
-                      No worries. It will be completed ASAP. I've asked him
-                      yesterday.
+                      {`No worries. It will be completed ASAP. I've asked him
+                    yesterday.`}
                     </p>
                     <h1 className="text-[12px] text-primary-gray-200 font-semibold text-opacity-70 text-left">
                       10:32

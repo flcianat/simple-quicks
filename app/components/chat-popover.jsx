@@ -1,7 +1,7 @@
 "use client";
 
 import { useToggle } from "../store/zustand";
-import { Search, User2 } from "lucide-react";
+import { Key, Search, User2 } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import { IconPerson } from "./icons";
@@ -20,11 +20,12 @@ export default function ChatPopover({ data }) {
 
         {/* chat list  */}
 
-        {data.map((x) => {
+        {data.map((x, i) => {
           return (
             <div
               className="py-2 px-2 hover:bg-gray-50 hover:cursor-pointer my-1 rounded-md transition-all"
               onClick={() => (setBubbleActive("chatroom"), setChatType(x.type))}
+              key={i}
             >
               <div
                 className={`${x.type === "single" ? "gap-7" : "gap-3"} flex `}
