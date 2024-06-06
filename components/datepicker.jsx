@@ -13,9 +13,8 @@ import {
 } from "@/components/ui/popover";
 import { useState } from "react";
 
-export function DatePicker({ deadline }) {
+export function DatePicker({ deadline, setDeadline }) {
   const [date, setDate] = useState(deadline !== null ? deadline : null);
-
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -24,18 +23,18 @@ export function DatePicker({ deadline }) {
           variant={"outline"}
           className={cn(
             "justify-between text-left font-normal w-[180px] border border-primary-gray-200 h-8",
-            !date && "text-muted-foreground"
+            !deadline && "text-muted-foreground"
           )}
         >
-          {date ? format(date, "dd/MM/yyyy") : <span>Set Date</span>}
+          {deadline ? format(deadline, "dd/MM/yyyy") : <span>Set Date</span>}
           <CalendarIcon size={15} />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="ml-[400px] p-0">
         <Calendar
           mode="single"
-          selected={date}
-          onSelect={setDate}
+          selected={deadline}
+          onSelect={setDeadline}
           initialFocus
         />
       </PopoverContent>

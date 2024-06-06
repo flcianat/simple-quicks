@@ -12,3 +12,4 @@ export const useToggle = create((set) => ({
     set((state) => ({ showChatRoom: !state.showChatRoom })),
   setChatType: (value) => set({ chatType: value }),
 }));
+

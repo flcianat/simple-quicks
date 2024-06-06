@@ -2,6 +2,7 @@
 import { Separator } from "@/components/ui/separator";
 import { useState } from "react";
 import {
+  Check,
   ChevronUp,
   Clock4,
   Ellipsis,
@@ -12,27 +13,57 @@ import {
 import { DatePicker } from "@/components/datepicker";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-export default function NewTask() {
-  const [checkbox, setCheckbox] = useState(false);
+import { Button } from "@/components/ui/button";
+import { BASE } from "../api/api-call";
+import { useTheme } from "next-themes";
+import { format } from "date-fns";
+import { useStoreTemp } from "../store/zustand";
+import { toast } from "sonner";
+
+export default function NewTask({ onClose }) {
   const [openTask, setOpenTask] = useState(true);
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [deadline, setDeadline] = useState(null);
+
+  const addTask = async () => {
+    const data = {
+      id: null,
+      name: name,
+      deadline: format(deadline, "dd/MM/yyyy"),
+      description: description,
+      completed: true,
+    };
+    const res = await BASE({
+      method: "post",
+      type: "tasks",
+      body: data,
+    });
+    if (res.status) {
+      toast.success("Task has been added");
+      onClose();
+      setName("");
+      setDescription("");
+      setDeadline("");
+    }
+  };
+
   return (
     <div className="text-primary-gray-300 py-4">
       <div className="flex justify-between place-items-center">
         <div className="flex gap-3 place-items-center">
-          <button
-            onClick={() => (setCheckbox(!checkbox), console.log(checkbox))}
-            className=""
-          >
-            {checkbox ? (
-              <SquareCheckBig size={20} className="text-primary-gray-200" />
-            ) : (
-              <Square size={20} className="text-primary-gray-200" />
-            )}
+          <button disabled>
+            <Square
+              size={20}
+              className="text-primary-gray-200 fill-gray-100 hover:cursor-not-allowed"
+            />
           </button>
 
           <Input
             className="h-8 border border-primary-gray-200 w-[300px] focus-visible:ring-transparent"
             placeholder="Type Task Title"
+            value={name}
+            onChange={(x) => setName(x.target.value)}
           />
         </div>
 
@@ -46,28 +77,44 @@ export default function NewTask() {
                 } `}
               />
             </button>
-            <button>
-              <Ellipsis size={15} />
-            </button>
           </div>
         </div>
       </div>
 
-      {openTask ? (
+      {/* {openTask ? ( */}
+      <div className={`${openTask ? "true" : "hidden"}`}>
         <div className="mt-3 pl-8 ">
           <div className="flex gap-3 place-items-center">
             <Clock4 size={15} className="text-primary-gray-200" />
-            <DatePicker size="sm" />
+            <DatePicker
+              size="sm"
+              deadline={deadline}
+              setDeadline={setDeadline}
+            />
           </div>
           <div className="w-full flex gap-3 place-items-baseline">
             <button className="">
               <Pencil size={15} className="text-primary-gray-200" />
             </button>
 
-            <Textarea className="text-[14px] mt-1.5  focus-visible:ring-transparent border border-primary-gray-200" />
+            <Textarea
+              className="text-[14px] mt-1.5  focus-visible:ring-transparent border border-primary-gray-200"
+              value={description}
+              onChange={(x) => setDescription(x.target.value)}
+            />
           </div>
         </div>
-      ) : null}
+      </div>
+
+      <div className="flex justify-end mt-2">
+        <Button
+          className="bg-primary-blue-100 hover:bg-primary-blue-200 font-bold "
+          size="sm"
+          onClick={() => (onClose, addTask())}
+        >
+          Add
+        </Button>
+      </div>
     </div>
   );
 }

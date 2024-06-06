@@ -7,16 +7,39 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { useToggle } from "../store/zustand";
-import { useState } from "react";
+import { useStoreTemp, useToggle } from "../store/zustand";
+import { useEffect, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import TaskCard from "./task-card";
 import NewTask from "./new-task";
+import { BASE } from "../api/api-call";
+import { toast } from "sonner";
+import Link from "next/link";
 
-export default function TaskPopover({ data }) {
+export default function TaskPopover() {
   const { bubbleActive } = useToggle();
   const [newTask, setNewTask] = useState(false);
+  const [allTask, setAllTask] = useState([]);
 
+  const getAllTask = async () => {
+    const res = await BASE({ method: "get", type: "tasks" });
+    setAllTask(res.data);
+  };
+
+  const deleteTask = async (id) => {
+    const res = await BASE({ method: "get", type: `tasks/${id}` });
+    if (res.status) {
+      setAllTask((prevTasks) => prevTasks.filter((task) => task.id !== id));
+
+      toast.success("Task has been removed");
+    } else {
+      console.error(`Failed to delete task with id ${id}.`);
+    }
+  };
+
+  useEffect(() => {
+    getAllTask();
+  }, []);
   return (
     <div className={bubbleActive === "task" ? "block" : "hidden"}>
       <div className="bg-white w-[600px] h-[520px] fixed right-0 mr-5 bottom-[100px] rounded-[2px] p-5">
@@ -43,26 +66,30 @@ export default function TaskPopover({ data }) {
             </DropdownMenu>
           </div>
           <div className="flex justify-end">
-            <Button
-              className="bg-primary-blue-100 hover:bg-primary-blue-200 font-bold"
-              size="sm"
-              onClick={() => setNewTask(<NewTask />)}
-            >
-              New Task
-            </Button>
+            <a href="#new-task">
+              <Button
+                className="bg-primary-blue-100 hover:bg-primary-blue-200 font-bold"
+                size="sm"
+                onClick={() => setNewTask(true)}
+              >
+                New Task
+              </Button>
+            </a>
           </div>
         </div>
 
         <div className=" overflow-auto h-[450px] w-full px-2">
-          {data.map((x, i) => {
+          {allTask.map((x, i) => {
             return (
               <div key={i}>
-                <TaskCard data={x} />
+                <TaskCard data={x} deleteTask={deleteTask} />
               </div>
             );
           })}
 
-          {newTask}
+          <div className={`${newTask ? "block" : "hidden"}`} id="new-task">
+            <NewTask onClose={() => setNewTask(false)} />
+          </div>
         </div>
       </div>
     </div>

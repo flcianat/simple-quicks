@@ -1,5 +1,6 @@
 import { Inter, Lato } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 const lato = Lato({
@@ -18,6 +19,7 @@ export default function RootLayout({ children }) {
       <body className={`${lato.className} bg-[#333333] h-full w-full`}>
         {children}
       </body>
+      <Toaster />
     </html>
   );
 }

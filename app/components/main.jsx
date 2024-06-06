@@ -12,24 +12,18 @@ export default function Main() {
   const [allTask, setAllTask] = useState([]);
   const [allChat, setAllChat] = useState([]);
 
-  const getAllTask = async () => {
-    const res = await BASE({ method: "get", type: "tasks" });
-    setAllTask(res.data);
-  };
-
   const getAllChatList = async () => {
     const res = await BASE({ method: "get", type: "chatList" });
     setAllChat(res.data);
   };
 
   useEffect(() => {
-    getAllTask();
     getAllChatList();
   }, []);
 
   return (
     <div className="p-5">
-      <TaskPopover data={allTask} />
+      <TaskPopover />
 
       {bubbleActive === "chatroom" ? (
         <ChatRoom type={chatType} />

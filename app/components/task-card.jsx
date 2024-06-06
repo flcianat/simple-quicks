@@ -19,11 +19,13 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { DatePicker } from "@/components/datepicker";
 
-export default function TaskCard({ data }) {
+export default function TaskCard({ data, deleteTask }) {
   const [checkbox, setCheckbox] = useState(data?.completed);
   const [openTask, setOpenTask] = useState(
     data?.completed === true ? true : false
   );
+  const [editDesc, setEditDesc] = useState(false);
+  const [editName, setEditName] = useState(false);
 
   return (
     <>
@@ -42,13 +44,23 @@ export default function TaskCard({ data }) {
                 )}
               </button>
 
-              <h1
-                className={`${
-                  !checkbox ? "line-through text-opacity-60" : ""
-                } text text-primary-gray-300 text-[14px] font-bold`}
-              >
-                {data.name}
-              </h1>
+              {editName ? (
+                <input
+                  value={data?.name}
+                  className="text text-primary-gray-300 text-[14px] font-bold p-1 outline-none focus:border focus:border-primary-gray-200 rounded-[5px]"
+                  onBlur={() => setEditName(false)}
+                />
+              ) : (
+                <h1
+                  className={`${
+                    !checkbox ? "line-through text-opacity-60" : ""
+                  } text text-primary-gray-300 text-[14px] font-bold`}
+                  onFocusCapture={() => setEditName(true)}
+                  tabIndex={0}
+                >
+                  {data?.name}
+                </h1>
+              )}
             </div>
 
             <div className="flex gap-3">
@@ -76,7 +88,10 @@ export default function TaskCard({ data }) {
                     />
                   </DropdownMenuTrigger>
                   <DropdownMenuContent className="mr-[50px]">
-                    <DropdownMenuItem className="hover:cursor-pointer text-indicator-red ">
+                    <DropdownMenuItem
+                      className="hover:cursor-pointer text-indicator-red"
+                      onClick={() => deleteTask(data.id)}
+                    >
                       Delete
                     </DropdownMenuItem>
                   </DropdownMenuContent>
@@ -111,11 +126,27 @@ export default function TaskCard({ data }) {
                   />
                 </button>
 
-                <p className="text-[14px] mt-1.5">
-                  {data?.description !== ""
-                    ? data?.description
-                    : "No Description"}
-                </p>
+                {editDesc ? (
+                  <textarea
+                    defaultValue={
+                      data?.description !== ""
+                        ? data?.description
+                        : "No Description"
+                    }
+                    onBlur={() => setEditDesc(false)}
+                    className="text-[14px] mt-1.5 w-full p-1 px-2 outline-none focus:border focus:border-primary-gray-200 rounded-[5px] min-h-[100px]"
+                  />
+                ) : (
+                  <p
+                    className="text-[14px] mt-1.5 hover:border hover:border-primary-gray-200 p-1 px-2 rounded-[5px]"
+                    onFocusCapture={() => setEditDesc(true)}
+                    tabIndex={0}
+                  >
+                    {data?.description !== ""
+                      ? data?.description
+                      : "No Description"}
+                  </p>
+                )}
               </div>
 
               <div className="flex place-items-center gap-3 mt-3">
