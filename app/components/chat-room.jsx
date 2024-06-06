@@ -115,7 +115,7 @@ export default function ChatRoom({ type = "" }) {
           </div>
           <Separator />
 
-          <div className="overflow-auto h-[450px] px-5 py-2">
+          <div className="overflow-auto h-[400px] px-5 py-2">
             <div className="mb-4">
               <h1 className="font-semibold text-chat-accent-orange text-[14px]">
                 Mary Hilda
@@ -129,6 +129,7 @@ export default function ChatRoom({ type = "" }) {
                 </h1>
               </div>
             </div>
+
             <div className="flex justify-end mb-4">
               <div>
                 <h1 className="font-semibold text-chat-accent-purple text-[14px] text-right">
@@ -146,6 +147,36 @@ export default function ChatRoom({ type = "" }) {
                     </h1>
                   </div>
                 </div>
+              </div>
+            </div>
+
+            <div className="mb-4">
+              <h1 className="font-semibold text-chat-accent-orange text-[14px]">
+                Mary Hilda
+              </h1>
+              <div className="bg bg-chat-base-orange p-2 space-y-1 w-[450px]">
+                <p className="text-[14px]">
+                  Hello Obaidullah, I will be your case advisor for case
+                  #029290. I have assigned some homework for you to fill. Please
+                  keep up with the due dates. Should you have any questions, you
+                  can message me anytime. Thanks.
+                </p>
+                <h1 className="text-[12px] text-primary-gray-200 font-semibold text-opacity-70">
+                  10:32
+                </h1>
+              </div>
+            </div>
+            <div className="mb-4">
+              <h1 className="font-semibold text-chat-accent-green text-[14px]">
+                Obaidullah Amarkhil
+              </h1>
+              <div className="bg bg-chat-base-green p-2 space-y-1 w-[450px]">
+                <p className="text-[14px]">
+                  Morning. I’ll try to do them. Thanks
+                </p>
+                <h1 className="text-[12px] text-primary-gray-200 font-semibold text-opacity-70">
+                  10:32
+                </h1>
               </div>
             </div>
           </div>

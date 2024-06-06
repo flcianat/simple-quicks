@@ -15,7 +15,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { BASE } from "../api/api-call";
-import { useTheme } from "next-themes";
 import { format } from "date-fns";
 import { useStoreTemp } from "../store/zustand";
 import { toast } from "sonner";
