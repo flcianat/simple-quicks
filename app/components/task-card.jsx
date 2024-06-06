@@ -33,10 +33,7 @@ export default function TaskCard({ data, deleteTask }) {
         <div className="text-primary-gray-300 py-4">
           <div className="flex justify-between place-items-center">
             <div className="flex gap-3 place-items-center">
-              <button
-                onClick={() => (setCheckbox(!checkbox), console.log(checkbox))}
-                className=""
-              >
+              <button onClick={() => setCheckbox(!checkbox)}>
                 {checkbox ? (
                   <Square size={20} className="text-primary-gray-200" />
                 ) : (
