@@ -26,6 +26,7 @@ export default function TaskCard({ data, deleteTask }) {
   );
   const [editDesc, setEditDesc] = useState(false);
   const [editName, setEditName] = useState(false);
+  const [deadline, setDeadline] = useState(data?.deadline);
 
   return (
     <>
@@ -108,7 +109,13 @@ export default function TaskCard({ data, deleteTask }) {
                       : "text-primary-gray-300"
                   } `}
                 />
-                <DatePicker size="sm" deadline={data?.deadline} />
+
+                {/* NOTE : only temporary date  */}
+                <DatePicker
+                  size="sm"
+                  deadline={deadline}
+                  setDeadline={setDeadline}
+                />
               </div>
 
               <div className="w-full flex gap-3 place-items-baseline">

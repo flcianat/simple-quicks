@@ -14,7 +14,6 @@ import {
 import { useState } from "react";
 
 export function DatePicker({ deadline, setDeadline }) {
-  const [date, setDate] = useState(deadline !== null ? deadline : null);
   return (
     <Popover>
       <PopoverTrigger asChild>

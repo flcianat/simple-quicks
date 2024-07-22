@@ -7,19 +7,19 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { useStoreTemp, useToggle } from "../store/zustand";
+import { useToggle } from "../store/zustand";
 import { useEffect, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import TaskCard from "./task-card";
 import NewTask from "./new-task";
 import { BASE } from "../api/api-call";
 import { toast } from "sonner";
-import Link from "next/link";
 
 export default function TaskPopover() {
   const { bubbleActive } = useToggle();
   const [newTask, setNewTask] = useState(false);
   const [allTask, setAllTask] = useState([]);
+  const [selectedTask, setSelectedTask] = useState("my task");
 
   const getAllTask = async () => {
     const res = await BASE({ method: "get", type: "tasks" });
@@ -37,6 +37,12 @@ export default function TaskPopover() {
     }
   };
 
+  const taskOption = [
+    { label: "my task", value: "my task" },
+    { label: "personal errands", value: "personal errands" },
+    { label: "urgent to-do", value: "urgent to-do" },
+  ];
+
   useEffect(() => {
     getAllTask();
   }, []);
@@ -53,15 +59,24 @@ export default function TaskPopover() {
                 <Button
                   variant="outline"
                   size="sm"
-                  className="flex justify-between place-items-center gap-3"
+                  className="flex justify-between place-items-center gap-3 capitalize"
                 >
-                  My Tasks <ChevronDown size={15} />
+                  {selectedTask} <ChevronDown size={15} />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-[200px] border border-primary-gray-200">
-                <DropdownMenuItem>Personal Errands</DropdownMenuItem>
-                <DropdownMenuSeparator className="border-[0.1px] border-primary-gray-200" />
-                <DropdownMenuItem>Urgent To-Do</DropdownMenuItem>
+                {taskOption.map((x, index) => {
+                  return (
+                    <div key={index} className="capitalize">
+                      <DropdownMenuItem
+                        onClick={() => setSelectedTask(x.value)}
+                      >
+                        {x.label}
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator className="border-[0.1px] border-primary-gray-100" />
+                    </div>
+                  );
+                })}
               </DropdownMenuContent>
             </DropdownMenu>
           </div>

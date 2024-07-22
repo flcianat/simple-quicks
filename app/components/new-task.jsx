@@ -1,35 +1,26 @@
 "use client";
-import { Separator } from "@/components/ui/separator";
 import { useState } from "react";
-import {
-  Check,
-  ChevronUp,
-  Clock4,
-  Ellipsis,
-  Pencil,
-  Square,
-  SquareCheckBig,
-} from "lucide-react";
+import { ChevronUp, Clock4, Pencil, Square } from "lucide-react";
 import { DatePicker } from "@/components/datepicker";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { BASE } from "../api/api-call";
 import { format } from "date-fns";
-import { useStoreTemp } from "../store/zustand";
 import { toast } from "sonner";
 
 export default function NewTask({ onClose }) {
   const [openTask, setOpenTask] = useState(true);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [deadline, setDeadline] = useState(null);
+  const [deadline, setDeadline] = useState(new Date());
 
   const addTask = async () => {
+    // NOTE : simulates task posting
     const data = {
       id: null,
       name: name,
-      deadline: format(deadline, "dd/MM/yyyy"),
+      deadline: deadline !== "" ? format(deadline, "dd/MM/yyyy") : null,
       description: description,
       completed: true,
     };
@@ -80,7 +71,6 @@ export default function NewTask({ onClose }) {
         </div>
       </div>
 
-      {/* {openTask ? ( */}
       <div className={`${openTask ? "true" : "hidden"}`}>
         <div className="mt-3 pl-8 ">
           <div className="flex gap-3 place-items-center">

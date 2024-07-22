@@ -9,7 +9,6 @@ import { useToggle } from "../store/zustand";
 
 export default function Main() {
   const { bubbleActive, chatType } = useToggle();
-  const [allTask, setAllTask] = useState([]);
   const [allChat, setAllChat] = useState([]);
 
   const getAllChatList = async () => {
